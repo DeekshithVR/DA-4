@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Menu</title>
+  <style>
+    body {
+      background-image: url('bkg.jpg');
+      background-size: cover;
+      background-position: center;
+      font-family: 'Abril Fatface', cursive;
+      color: rgb(0, 0, 0);
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.4);
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu-item {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .add-to-cart {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
+
+    .add-to-cart:hover {
+      background-color: #45a049;
+    }
+
+    .quantity {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Restaurant Menu</h1>
+    <div id="filters">
+      <h2>Filters</h2>
+      <label for="category">Category:</label>
+      <select id="category">
+        <option value="all">All</option>
+        <option value="appetizers">Appetizers</option>
+        <option value="entrees">Entrees</option>
+        <option value="desserts">Desserts</option>
+      </select>
+      <h3>Dietary Preferences:</h3>
+      <label><input type="checkbox" class="dietary" value="vegan"> Vegan</label>
+      <label><input type="checkbox" class="dietary" value="gluten-free"> Gluten-Free</label>
+      <label><input type="checkbox" class="dietary" value="vegetarian"> Vegetarian</label>
+      <h3>Price Range:</h3>
+      <label><input type="radio" name="price" class="price" value="under-10"> Under $10</label>
+      <label><input type="radio" name="price" class="price" value="10-20"> $10-$20</label>
+      <label><input type="radio" name="price" class="price" value="over-20"> Over $20</label>
+    </div>
+    <div id="menu">
+    </div>
+    <button id="submit">Submit</button>
+    <div id="cart"></div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuItems = [
+        { name: 'Classic Stuffed Peppers', description: 'Of all the food you can stuff, stuffed peppers are at the top of our list. Bell peppers are large enough to hold a lot, strong enough to keep their shape in the oven, and mild enough in flavor to go with just about anything. Here we’re filling them with beefy, tomato rice, and shredded Monterey Jack cheese, but you can customize them to fit your taste.', price: 9.99, category: 'appetizers', dietary: ['gluten-free'] },
+        { name: 'Lentil Bolognese', description: 'Rich and robust, this plant-based Lentil Bolognese is hearty full of depth of flavor. Toss it with your favorite pasta, or spoon it over creamy polenta- either way, this simple, nourishing vegan meal is one the whole family will enjoy and will quickly become one of your go-to vegan meals.', price: 14.99, category: 'entrees', dietary: ['vegan'] },
+        { name: 'Spinach and ricotta zucchini cannelloni', description: 'Gluten free and vegetarian, this spinach and ricotta zucchini cannelloni caters to your familys tricky dietary needs.', price: 21.99, category: 'desserts', dietary: ['vegetarian', 'gluten-free'] },
+      ];
+
+      const menuContainer = document.getElementById('menu');
+      const categoryFilter = document.getElementById('category');
+      const dietaryFilter = document.querySelectorAll('.dietary');
+      const priceFilter = document.querySelectorAll('.price');
+      const submitButton = document.getElementById('submit');
+      const cartDisplay = document.getElementById('cart');
+
+      function renderMenu(items) {
+        menuContainer.innerHTML = '';
+        items.forEach(item => {
+          const menuItem = document.createElement('div');
+          menuItem.classList.add('menu-item');
+          menuItem.innerHTML = `
+            <h3>${item.name}</h3>
+            <p>${item.description}</p>
+            <p>$${item.price.toFixed(2)}</p>
+            <div class="quantity">
+              Quantity: <input type="number" min="1" value="1">
+            </div>
+            <button class="add-to-cart" onclick="addToCart('${item.name}', ${item.price.toFixed(2)})">Add to Cart</button>
+          `;
+          menuContainer.appendChild(menuItem);
+        });
+      }
+
+      function filterMenu() {
+        let filteredItems = menuItems.filter(item => {
+          let categoryMatch = categoryFilter.value === 'all' || item.category === categoryFilter.value;
+          let dietaryMatch = Array.from(dietaryFilter).every(checkbox => !checkbox.checked || item.dietary.includes(checkbox.value));
+          let priceMatch = Array.from(priceFilter).every(radio => !radio.checked || {
+            'under-10': item.price < 10,
+            '10-20': item.price >= 10 && item.price <= 20,
+            'over-20': item.price > 20
+          }[radio.value]);
+
+          return categoryMatch && dietaryMatch && priceMatch;
+        });
+
+        renderMenu(filteredItems);
+      }
+
+      categoryFilter.addEventListener('change', filterMenu);
+      dietaryFilter.forEach(checkbox => checkbox.addEventListener('change', filterMenu));
+      priceFilter.forEach(radio => radio.addEventListener('change', filterMenu));
+
+      submitButton.addEventListener('click', function() {
+        const selectedItems = menuItems.filter(item => {
+          return Array.from(document.querySelectorAll('.menu-item')).some(menuItem => menuItem.innerText.includes(item.name));
+        });
+        localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+        window.location.href = 'cart.html';
+      });
+
+      window.addToCart = function(name, price) {
+        const quantityInput = event.target.parentNode.querySelector('input[type="number"]');
+        const quantity = parseInt(quantityInput.value);
+
+        const cartItem = { name: name, price: price, quantity: quantity };
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        cartItems.push(cartItem);
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        updateCartDisplay();
+        alert('Item added to cart!');
+      }
+
+      function updateCartDisplay() {
+        cartDisplay.innerHTML = '';
+        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        if (cartItems.length === 0) {
+          cartDisplay.innerHTML = '<p>Your cart is empty.</p>';
+        } else {
+          const cartList = document.createElement('ul');
+          cartItems.forEach(item => {
+            const cartItem = document.createElement('li');
+            cartItem.textContent = `${item.name} - $${(item.price * item.quantity).toFixed(2)} (${item.quantity})`;
+            cartList.appendChild(cartItem);
+          });
+          cartDisplay.appendChild(cartList);
+        }
+      }
+
+      renderMenu(menuItems);
+      updateCartDisplay();
+    });
+  </script>
+</body>
+</html>
