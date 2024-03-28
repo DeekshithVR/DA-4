@@ -8,27 +8,27 @@
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Dancing Script', cursive; /* Change font family to Dancing Script */
-      background-image: url('bg1.jpg'); /* Background image */
+      font-family: 'Dancing Script', cursive; 
+      background-image: url('bg1.jpg'); 
       background-size: cover;
       background-position: center;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh; /* Full viewport height */
+      height: 100vh; 
     }
 
     .content {
       text-align: center;
     }
 
-    /* Updated font color */
+    
     h1 {
-      color: black; /* Set font color to black */
-      animation: jumpFromAbove 0.5s ease-in-out forwards; /* Apply animation */
+      color: black; 
+      animation: jumpFromAbove 0.5s ease-in-out forwards;
     }
 
-    /* Animation for jumping from above */
+    
     @keyframes jumpFromAbove {
       0% {
         opacity: 0;
@@ -41,17 +41,17 @@
     }
 
     .box {
-      background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+      background-color: rgba(255, 255, 255, 0.8); 
       padding: 20px;
-      border-radius: 10px; /* Rounded corners */
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Box shadow */
-      margin: 10px; /* Margin between boxes */
-      width: calc(33.33% - 20px); /* Equal width for the first two boxes */
+      border-radius: 10px; 
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
+      margin: 10px; 
+      width: calc(33.33% - 20px); 
     }
 
     .box:last-child {
-      width: calc(33.33% * 5 - 20px * 5); /* 5 times the length of the first two boxes */
-      height: calc(100% * 5); /* 5 times the height of the first two boxes */
+      width: calc(33.33% * 5 - 20px * 5); 
+      height: calc(100% * 5); 
     }
 
     input[type="text"] {
@@ -59,28 +59,28 @@
       height: 100%;
       border: none;
       background: transparent;
-      font-family: 'Dancing Script', cursive; /* Change font family to Dancing Script */
+      font-family: 'Dancing Script', cursive; 
       font-size: 16px;
       outline: none;
-      color: black; /* Set font color to black */
+      color: black; 
     }
 
-    /* Style for submit button */
+   
     .submit-button {
       margin-top: 20px;
       padding: 10px 20px;
-      background-color: white; /* Set background color to white */
+      background-color: white; 
       border: none;
       border-radius: 5px;
-      font-family: 'Dancing Script', cursive; /* Change font family to Dancing Script */
+      font-family: 'Dancing Script', cursive; 
       font-size: 18px;
-      color: black; /* Set font color to black */
+      color: black; 
       cursor: pointer;
-      animation: appearOutofNowhere 0.5s ease-in-out forwards; /* Apply animation */
-      opacity: 0; /* Initially hide the button */
+      animation: appearOutofNowhere 0.5s ease-in-out forwards; 
+      opacity: 0; 
     }
 
-    /* Animation for appearing out of nowhere */
+  
     @keyframes appearOutofNowhere {
       0% {
         opacity: 0;
@@ -93,8 +93,8 @@
     }
 
     .submit-button:hover {
-      background-color: black; /* Change background color on hover */
-      color: white; /* Change font color on hover */
+      background-color: black; 
+      color: white; 
     }
   </style>
 </head>
