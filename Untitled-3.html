@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Picture Gallery</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-image: url('locbg.jpg'); /* Background image */
+      background-size: cover;
+      background-position: center;
+    }
+
+    h1 {
+      color: white; /* Change heading color to white */
+      text-align: center;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .gallery-item {
+      width: calc(33.33% - 20px);
+      margin-bottom: 20px;
+      text-align: center;
+      overflow: hidden; /* Hide overflow for zoom effect */
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      transition: transform 0.3s ease; /* Smooth transition for zoom effect */
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1); /* Zoom effect on hover */
+    }
+
+    .address {
+      margin-top: 5px;
+      font-size: 18px; /* Increased font size */
+      font-family: 'Dancing Script', cursive; /* Change font family to Dancing Script */
+      color: white; /* Changed font color to white */
+    }
+  </style>
+</head>
+<body>
+  <h1>Find Us At</h1>
+  <div class="gallery">
+    <div class="gallery-item">
+      <img src="1.jpg" alt="Image 1">
+      <div class="address">
+        Rd Number 1, Mada Manzil, Banjara Hills, Hyderabad, Telangana 500034, India
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img src="2.jpg" alt="Image 2">
+      <div class="address">
+        115/1, Nanakramguda Rd, Financial District, Gachibowli, Hyderabad, Telangana 500032, India
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img src="3.jpg" alt="Image 3">
+      <div class="address">
+        5-9-16, Opp. Secretariat, Saifabad, Khairtabad, Hyderabad, Telangana 500063, India
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img src="4.jpg" alt="Image 4">
+      <div class="address">
+        R. Gandhi International, Airport Road, Shamshabad, Hyderabad, Telangana 500108, India
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img src="5.jpg" alt="Image 5">
+      <div class="address">
+        10th Cross, Margosa Road, Malleswaram, Bengaluru, Karnataka 560003, India
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img src="6.jpg" alt="Image 6">
+      <div class="address">
+        112, 4th Main Rd, 7 Block, 3rd Phase, Banashankari 3rd Stage, Banashankari, Bengaluru, Karnataka 560085, India
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DINER</title>
+  <style>
+    body {
+      font-family: cursive;
+      margin: 0;
+      padding: 0;
+      background-image: url('mainbg.jpg');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #diner {
+      font-size: 48px;
+      font-weight: bold;
+      color: white;
+      position: relative;
+      cursor: pointer;
+      animation: jiggle 0.5s ease infinite;
+    }
+
+    @keyframes jiggle {
+      0% {
+        transform: translateX(-2px);
+      }
+      50% {
+        transform: translateX(2px);
+      }
+      100% {
+        transform: translateX(-2px);
+      }
+    }
+
+    #note {
+      font-size: 16px;
+      color: black;
+      margin-top: 20px;
+    }
+
+    #action-box {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      margin-top: 20px;
+      opacity: 0;
+    }
+
+    .action-button {
+      margin: 10px;
+      padding: 10px 20px;
+      background-color: yellow;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transform: translateX(-50px);
+      opacity: 0;
+    }
+
+    @keyframes slideIn {
+      0% {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="diner" onclick="showActions()">
+    <span>D</span><span>I</span><span>N</span><span>E</span><span>R</span>
+  </div>
+  <div id="note">Click on DINER to proceed further</div>
+  <div id="action-box">
+    <button class="action-button" onclick="redirectToMenu()">CLICK HERE FOR OUR MENU</button>
+    <button class="action-button" onclick="redirectToLocations()">FRANCHISE</button>
+    <button class="action-button" onclick="redirectToContact()">CONTACT</button>
+  </div>
+  <script>
+    function showActions() {
+      var actionBox = document.getElementById("action-box");
+      actionBox.style.opacity = "1";
+      var buttons = document.getElementsByClassName("action-button");
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].style.animation = "slideIn 0.5s forwards";
+        buttons[i].style.opacity = "1";
+      }
+      document.getElementById("diner").removeEventListener("click", showActions);
+    }
+
+    function redirectToMenu() {
+      window.location.href = 'Untitled-2.html';
+    }
+
+    function redirectToLocations() {
+      window.location.href = 'Untitled-3.html';
+    }
+
+    function redirectToContact() {
+      window.location.href = 'Untitled-4.html';
+    }
+  </script>
+</body>
+</html>

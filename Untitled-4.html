@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Dancing Script', cursive; /* Change font family to Dancing Script */
+      background-image: url('bg1.jpg'); /* Background image */
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Full viewport height */
+    }
+
+    .content {
+      text-align: center;
+    }
+
+    /* Updated font color */
+    h1 {
+      color: black; /* Set font color to black */
+      animation: jumpFromAbove 0.5s ease-in-out forwards; /* Apply animation */
+    }
+
+    /* Animation for jumping from above */
+    @keyframes jumpFromAbove {
+      0% {
+        opacity: 0;
+        transform: translateY(-100px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .box {
+      background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+      padding: 20px;
+      border-radius: 10px; /* Rounded corners */
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Box shadow */
+      margin: 10px; /* Margin between boxes */
+      width: calc(33.33% - 20px); /* Equal width for the first two boxes */
+    }
+
+    .box:last-child {
+      width: calc(33.33% * 5 - 20px * 5); /* 5 times the length of the first two boxes */
+      height: calc(100% * 5); /* 5 times the height of the first two boxes */
+    }
+
+    input[type="text"] {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: transparent;
+      font-family: 'Dancing Script', cursive; /* Change font family to Dancing Script */
+      font-size: 16px;
+      outline: none;
+      color: black; /* Set font color to black */
+    }
+
+    /* Style for submit button */
+    .submit-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: white; /* Set background color to white */
+      border: none;
+      border-radius: 5px;
+      font-family: 'Dancing Script', cursive; /* Change font family to Dancing Script */
+      font-size: 18px;
+      color: black; /* Set font color to black */
+      cursor: pointer;
+      animation: appearOutofNowhere 0.5s ease-in-out forwards; /* Apply animation */
+      opacity: 0; /* Initially hide the button */
+    }
+
+    /* Animation for appearing out of nowhere */
+    @keyframes appearOutofNowhere {
+      0% {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .submit-button:hover {
+      background-color: black; /* Change background color on hover */
+      color: white; /* Change font color on hover */
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <h1>Have any questions? We would love to hear from you.</h1>
+    <div class="box">
+      <input type="text" placeholder="Name">
+    </div>
+    <div class="box">
+      <input type="text" placeholder="Email">
+    </div>
+    <div class="box">
+      <input type="text" placeholder="Type your query">
+    </div>
+    <!-- Submit button -->
+    <button class="submit-button">Submit</button>
+  </div>
+</body>
+</html>
